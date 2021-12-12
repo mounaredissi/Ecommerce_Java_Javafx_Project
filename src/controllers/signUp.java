@@ -15,7 +15,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -23,6 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import utils.ConnectionUtil;
 
@@ -58,6 +62,7 @@ public class signUp implements Initializable{
     void Back(ActionEvent event) {
 
     }
+    Stage stage;
     public signUp() {
         con = ConnectionUtil.conDB();
     }
@@ -111,6 +116,8 @@ public class signUp implements Initializable{
             } else {
                 setLblError(Color.GREEN, "Compte Exite deja");
                 
+    				compteExiste(stage);	
+    			
              	
             }
         } catch (SQLException ex) {
@@ -142,6 +149,18 @@ public class signUp implements Initializable{
 	            
 	        }
 		
+	}
+public void compteExiste (Stage stage){	
+		
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		
+		alert.setHeaderText("compte existe!");
+		alert.setContentText("Entrer!");
+		
+		if (alert.showAndWait().get() == ButtonType.OK){
+			System.out.println("You successfully logged out");
+			
+		} 
 	}
     private ObservableList<ObservableList> data;
     String SQL = "SELECT * from users";
