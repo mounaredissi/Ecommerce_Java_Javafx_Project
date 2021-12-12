@@ -115,32 +115,12 @@ public class element {
 	        	            preparedStatement.setInt(2, commande);
 	        	            preparedStatement.setInt(3,Integer.parseInt(entry.getValue())); 
 	        	            preparedStatement.execute();
-	        	            
-	      	    	            
 	                		}
-	                    
 	                }
-	                
-
-	           
 	            } catch (SQLException ex) {
 	                System.err.println(ex.getMessage());
 	            }
-	            
-	     
-                /*if (resultSet.next() ) {
-                	int idc = resultSet.getInt("idC");
-                	System.out.println(idc);
-                	query = "INSERT INTO `produits`(  `idP`, `idC`,`qte`) VALUES (?,?,?)";
-                	for(java.util.Map.Entry<produit,String > entry: contextCollection.entrySet()) {
-                		preparedStatement = connection.prepareStatement(query);
-        	            preparedStatement.setInt(1,entry.getKey().getId());
-        	            preparedStatement.setInt(2, idc);
-        	            preparedStatement.setInt(3, Integer.parseInt(entry.getValue()));
-        	            preparedStatement.execute();
-      	    	            
-                		}
-                }*/
+  
 	        } catch (SQLException ex) {
 	            Logger.getLogger(ajoutProduitController.class.getName()).log(Level.SEVERE, null, ex);
 	        }

@@ -20,7 +20,7 @@
                 <PasswordField fx:id="txtPassword" layoutX="7.0" layoutY="61.0" prefHeight="34.0" prefWidth="275.0" promptText="password" stylesheets="@../styling/fullpackstyling.css" />
                 <Button fx:id="btnSignin" layoutX="76.0" layoutY="202.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="34.0" prefWidth="137.0" stylesheets="@../styling/fullpackstyling.css" text="Sign in" />
                 
-                <Button fx:id="btnSignup" layoutX="4.0" layoutY="296.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="275.0" stylesheets="@../styling/fullpackstyling.css" text="Sign up" />
+                <Button fx:id="btnSignup" layoutX="4.0" layoutY="296.0" mnemonicParsing="false" onAction="#signUp" prefHeight="34.0" prefWidth="275.0" stylesheets="@../styling/fullpackstyling.css" text="Sign up" />
                 <Separator layoutY="270.0" prefHeight="7.0" prefWidth="275.0" />
                 <Label alignment="CENTER" layoutX="127.0" layoutY="262.0" prefHeight="23.0" prefWidth="31.0" style="-fx-background-color: #fff;" text="Or" textFill="#5b5a5a">
                     <font>

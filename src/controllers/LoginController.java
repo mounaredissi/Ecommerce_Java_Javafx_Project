@@ -17,6 +17,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -235,4 +236,25 @@ public class LoginController implements Initializable {
             } catch (SQLException ex) {
                 System.err.println(ex.getMessage());
             }
-}}
+
+}
+        @FXML
+        void signUp(ActionEvent event) {
+        	System.out.println("ahlaaaa");
+        	try {
+
+                //add you loading or delays - 😉
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                //stage.setMaximized(true);
+                stage.close();
+                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/RegisterStaff.fxml")));
+                stage.setScene(scene);
+                stage.show();
+
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            }
+        	
+        }
+        }
