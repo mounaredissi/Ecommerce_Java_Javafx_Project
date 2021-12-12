@@ -27,7 +27,10 @@ public class element {
 
 	    private HashMap<produit,String> contextCollection;
 
-
+	    public HashMap<produit, String> getElements () {
+			return contextCollection;
+	    	
+	    }
 	    private element()
 	    {
 	        contextCollection = new HashMap<>();
@@ -115,7 +118,46 @@ public class element {
 	        	            preparedStatement.setInt(2, commande);
 	        	            preparedStatement.setInt(3,Integer.parseInt(entry.getValue())); 
 	        	            preparedStatement.execute();
-	                		}
+	        	           String query2 = "select * from  `produits` where `id` ="+entry.getKey().getId();
+	        	           try {
+	       	    	        java.sql.Statement ste = connection.createStatement();
+	       	                ResultSet rse = ste.executeQuery(query2) ;
+	       	                System.out.println("ahla bik ");
+	       	             if (!rse.next() ) {
+	 	                    System.out.println("no");
+	 	                  }
+	       	              else {
+		       	            System.out.println("ahla bik ");
+	 	                    int produitS =  rse.getInt("id");
+	 	                    int produitQte= rse.getInt("qte");
+	 	                 	System.out.print("lid du produit"+produitS+"et la quantité est "+produitQte);
+	 	              	 String query4 = "UPDATE `produits` SET "
+	 	                       
+	 	                        + "`qte`= ? WHERE id = '"+produitS+"'";
+	 	              	 try {
+	 	              		 int n= produitQte-Integer.parseInt(entry.getValue()) ;
+	 	              		 System.out.println("la nouvelle quantité "+n);
+	 	                    preparedStatement = connection.prepareStatement(query4);
+	 	                    preparedStatement.setInt(1,produitQte-Integer.parseInt(entry.getValue()));
+	 	                    preparedStatement.execute();
+	 	                    
+	 	                    
+
+	 	                } catch (SQLException ex) {
+	 	                    Logger.getLogger(ajoutProduitController.class.getName()).log(Level.SEVERE, null, ex);
+	 	                }
+
+	 	           }
+	       	               
+	        	           }
+	        	           catch (SQLException ex) {
+	       	                System.err.println(ex.getMessage());
+	       	            }
+	        	           
+	       	               
+	        	            
+	        	                            		}
+	                	
 	                }
 	            } catch (SQLException ex) {
 	                System.err.println(ex.getMessage());

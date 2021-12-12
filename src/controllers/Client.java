@@ -89,8 +89,7 @@ public class Client implements Initializable{
 
 
 	    }
-	        @Override
-
+	      
 	    public void initialize(URL arg0, ResourceBundle arg1) {
 	        try {
 	            loadDate();
@@ -220,6 +219,23 @@ public class Client implements Initializable{
 	    	element e = element.getElement();
 	    	e.applyPannier();
 
+	    }
+	    @FXML
+	    void loadPanier(ActionEvent event) {
+        	try {
+
+                //add you loading or delays - 😉
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                //stage.setMaximized(true);
+                stage.close();
+                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/ViewCategory.fxml")));
+                stage.setScene(scene);
+                stage.show();
+
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            }
 	    }
 
 

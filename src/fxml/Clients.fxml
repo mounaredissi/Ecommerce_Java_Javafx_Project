@@ -51,7 +51,7 @@
         </Pane>
         <Button fx:id="panier" layoutX="778.0" layoutY="140.0" mnemonicParsing="false" onAction="#voirPanier" prefHeight="43.0" prefWidth="59.0" />
         <Button layoutX="940.0" layoutY="141.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="52.0" />
-        <Button layoutX="861.0" layoutY="141.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="52.0" />
+        <Button layoutX="861.0" layoutY="141.0" mnemonicParsing="false" onAction="#loadPanier" prefHeight="43.0" prefWidth="52.0" />
         <ImageView fitHeight="33.0" fitWidth="31.0" layoutX="872.0" layoutY="146.0">
             <image>
 
