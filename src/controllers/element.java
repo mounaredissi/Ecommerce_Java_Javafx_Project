@@ -1,17 +1,32 @@
 package controllers;
 
 import java.security.KeyStore.Entry;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import com.mysql.cj.xdevapi.Statement;
+
+import javafx.scene.paint.Color;
+
 import java.util.*;
 
 import models.produit;
+import utils.ConnectionUtil;
 
 public class element {
 	   private static element elt;
 
-	    private HashMap<String,produit> contextCollection;
+	    private HashMap<produit,String> contextCollection;
+
 
 	    private element()
 	    {
@@ -27,26 +42,31 @@ public class element {
 	    }
 
 	    public void affichage () {
-	    	for (String name: contextCollection.keySet()) {
-	    	    String key = name.toString();
+	    	for (produit name: contextCollection.keySet()) {
+	    		produit key = name;
 	    	    String value = contextCollection.get(name).toString();
-	    	    System.out.println(key + " et la valeur " + value);
+	    	    System.out.println(key.getNom() + " et la valeur " + value);
 	    	}
 	    }
 	    public String getKey(produit p) {
 	    	String s = null;
-	    	for(java.util.Map.Entry<String, produit> entry: contextCollection.entrySet()) {
+	    	for(java.util.Map.Entry<produit,String > entry: contextCollection.entrySet()) {
 
 	    	      
-	    	      if(entry.getValue() == p) {
-	    	       s=entry.getKey();
+	    	      if(entry.getKey() == p) {
+	    	       s=entry.getValue();
 	    	      } 	       
 	    }
 			return s;}
 	    
-	    public void putContext(String key,produit context)
+	    public void putContext(produit key,String context)
 	    {
-	        contextCollection.put(key, context);
+	    	if(!contextCollection.containsKey(key))contextCollection.put(key, context);
+	    	else {
+	    		contextCollection.remove(key) ;contextCollection.put(key, context);
+	    	}
+	        
+	        
 	    }
 
 	    public void removeContext(String key)
@@ -57,6 +77,73 @@ public class element {
 	    public void emptyGlobe() 
 	    {
 	        contextCollection.clear();
+	    }
+	    public void applyPannier() {
+	    	String query = null;
+	        Connection connection = null;
+	        ResultSet resultSet = null;
+	        PreparedStatement preparedStatement = null;
+	        connection = ConnectionUtil.conDB();
+	        query = "INSERT INTO `commandes`( `date`, `idClient`,`etat`) VALUES (?,?,?)";
+	        Singleton s = Singleton.getInstance() ; 
+	        int idClient = s.getId() ; 
+	        LocalDateTime dateN = LocalDateTime.now();   
+	        String date =dateN.toString();
+	        String m ="bebba";
+	        System.out.println(date);
+	        try {
+	            preparedStatement = connection.prepareStatement(query);
+	            preparedStatement.setString(1,date);
+	            preparedStatement.setInt(2, idClient);
+	            preparedStatement.setString(3, "en cours");
+	            preparedStatement.execute();
+		        connection = ConnectionUtil.conDB();
+		        String sql = "SELECT * FROM  `commandes` having `idClient` ="+idClient+" and `date` ='"+date+"';";
+	            try {
+	    	        java.sql.Statement st = connection.createStatement();
+	                ResultSet rs = st.executeQuery(sql) ;
+	               System.out.println("ahla bik ");
+	                if (!rs.next() ) {
+	                    System.out.println("no");
+	                } else {
+	                    int commande =  rs.getInt("idC");
+	                 	System.out.print(commande);
+	                 	query = "INSERT INTO `produitc`(  `idP`, `idC`,`qte`) VALUES (?,?,?)";
+	                	for(java.util.Map.Entry<produit,String > entry: contextCollection.entrySet()) {
+	                		preparedStatement = connection.prepareStatement(query);
+	        	            preparedStatement.setInt(1,entry.getKey().getId());
+	        	            preparedStatement.setInt(2, commande);
+	        	            preparedStatement.setInt(3,Integer.parseInt(entry.getValue())); 
+	        	            preparedStatement.execute();
+	        	            
+	      	    	            
+	                		}
+	                    
+	                }
+	                
+
+	           
+	            } catch (SQLException ex) {
+	                System.err.println(ex.getMessage());
+	            }
+	            
+	     
+                /*if (resultSet.next() ) {
+                	int idc = resultSet.getInt("idC");
+                	System.out.println(idc);
+                	query = "INSERT INTO `produits`(  `idP`, `idC`,`qte`) VALUES (?,?,?)";
+                	for(java.util.Map.Entry<produit,String > entry: contextCollection.entrySet()) {
+                		preparedStatement = connection.prepareStatement(query);
+        	            preparedStatement.setInt(1,entry.getKey().getId());
+        	            preparedStatement.setInt(2, idc);
+        	            preparedStatement.setInt(3, Integer.parseInt(entry.getValue()));
+        	            preparedStatement.execute();
+      	    	            
+                		}
+                }*/
+	        } catch (SQLException ex) {
+	            Logger.getLogger(ajoutProduitController.class.getName()).log(Level.SEVERE, null, ex);
+	        }
 	    }
 	    
 	    

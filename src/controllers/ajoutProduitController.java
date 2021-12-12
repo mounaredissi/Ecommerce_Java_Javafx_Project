@@ -28,7 +28,7 @@ import models.produit;
 import models.categorie;
 
 import utils.ConnectionUtil;
-
+import utils.ConnectionUtil;
 public class ajoutProduitController implements Initializable  {
 	  @FXML
 	    private ComboBox<String> cat ; 

@@ -148,11 +148,10 @@ public class Client implements Initializable{
 	                        setText(null);
 
 	                    } else {
-	                        Button increment = new Button("+");
 	                        TextField b = new TextField();
-	                        Button decrement = new Button("-");
 	                        Button ajoutIcon = new Button("ajout");
 	                        //Button editIcon = new Button("edit");
+	                        
 
 	                        ajoutIcon.setStyle(
 	                                " -fx-cursor: hand ;"
@@ -173,7 +172,7 @@ public class Client implements Initializable{
 	                         	//g.getContext();
 	                         	System.out.println("la quantité est "+b.getText());
 	                         	element m = element.getElement();
-	                         	m.putContext(b.getText(), produit);
+	                         	m.putContext( produit, b.getText());
 	                         	m.affichage();
 	                         	
 
@@ -197,11 +196,9 @@ public class Client implements Initializable{
 	                      
 
 
-	                        HBox managebtn = new HBox(increment,b,decrement, ajoutIcon);
+	                        HBox managebtn = new HBox(b, ajoutIcon);
 	                        managebtn.setStyle("-fx-alignment:center");
-	                        HBox.setMargin(decrement, new Insets(2, 1, 0, 1));
 	                        HBox.setMargin(b, new Insets(2, 2, 0, 1));
-	                        HBox.setMargin(increment, new Insets(2, 3, 0, 1));
 	                        HBox.setMargin(ajoutIcon, new Insets(2, 4, 0, 1));
 	                        setGraphic(managebtn);
 
@@ -220,7 +217,8 @@ public class Client implements Initializable{
 	    }
 	    @FXML
 	    void voirPanier(ActionEvent event) {
-	    	
+	    	element e = element.getElement();
+	    	e.applyPannier();
 
 	    }
 
