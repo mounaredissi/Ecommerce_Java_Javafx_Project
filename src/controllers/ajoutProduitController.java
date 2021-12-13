@@ -52,7 +52,8 @@ public class ajoutProduitController implements Initializable  {
 
     @FXML
     private TextField qteProd;
-
+    @FXML
+    private TextField prix;
     @FXML
 
     ObservableList<String> categories = FXCollections.observableArrayList();
@@ -76,8 +77,9 @@ public class ajoutProduitController implements Initializable  {
           String id = idProd.getText();
           String nom = nomProd.getText();
           String qte = qteProd.getText();
+          String prixs = prix.getText();
 
-          if (id.isEmpty() || nom.isEmpty() || qte.isEmpty() || cat.getSelectionModel().getSelectedItem() == null ) {
+          if (id.isEmpty() || nom.isEmpty() || qte.isEmpty() || cat.getSelectionModel().getSelectedItem() == null || prixs.isEmpty() ) {
               Alert alert = new Alert(Alert.AlertType.ERROR);
               alert.setHeaderText(null);
               alert.setContentText("Please Fill All DATA");
@@ -106,6 +108,7 @@ public class ajoutProduitController implements Initializable  {
         nomProd.setText(null);
         idProd.setText(null);
         qteProd.setText(null);
+        prix.setText(null);
         
     }
 
@@ -113,7 +116,7 @@ public class ajoutProduitController implements Initializable  {
 
         if (update == false) {
             
-            query = "INSERT INTO `produits`( `id`, `nom`, `qte`,`cat`) VALUES (?,?,?,?)";
+            query = "INSERT INTO `produits`( `id`, `nom`, `qte`,`cat`, `prix`) VALUES (?,?,?,?,?)";
 
         }else{
             String id = idProd.getText();
@@ -122,7 +125,8 @@ public class ajoutProduitController implements Initializable  {
                      + "`id`=?,"
                      + "`nom`=?,"
                      + "`qte`=?,"
-                     + "`cat`= ? WHERE id = '"+id+"'";
+                     + "`cat`=?,"
+                     + "`prix`= ? WHERE id = '"+id+"'";
         }
 
     }
@@ -136,6 +140,7 @@ public class ajoutProduitController implements Initializable  {
             preparedStatement.setString(2, nomProd.getText());
             preparedStatement.setString(3, qteProd.getText());
             preparedStatement.setString(4, cat.getValue().toString());
+            preparedStatement.setString(5, prix.getText());
             preparedStatement.execute();
             
 
@@ -150,11 +155,13 @@ public class ajoutProduitController implements Initializable  {
         this.update = b;
 
     }
-	public void setTextField(int id, String nom, int qte, String cate) {
+	public void setTextField(int id, String nom, int qte, String cate, String prixs) {
 		idProd.setText(String.valueOf(id)); 
 		nomProd.setText(nom);
 		qteProd.setText(String.valueOf(qte)); 
 		cat.getSelectionModel().select(cate);
+		prix.setText(prixs); 
+
 
 	}
 	void close() {

@@ -77,7 +77,8 @@ public class produitController implements Initializable  {
                         resultSet.getInt("id"),
                         resultSet.getString("nom"),
                         resultSet.getInt("qte"),
-                        resultSet.getString("cat")));
+                        resultSet.getString("cat"),
+                        resultSet.getString("prix")));
                 productTab.setItems(produitList);
                 
             }
@@ -104,7 +105,8 @@ private void loadDate() {
         nomCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
         qteCol.setCellValueFactory(new PropertyValueFactory<>("qte"));
         catCol.setCellValueFactory(new PropertyValueFactory<>("cat"));
-        
+        catCol.setCellValueFactory(new PropertyValueFactory<>("prix"));
+
         //add cell of button edit 
          Callback<TableColumn<produit, String>, TableCell<produit, String>> cellFoctory = (TableColumn<produit, String> param) -> {
             // make cell containing buttons
@@ -158,7 +160,7 @@ private void loadDate() {
                             ajoutProduitController addProductController = loader.getController();
                             addProductController.setUpdate(true);
                             addProductController.setTextField(produit.getId(), produit.getNom(), 
-                            produit.getQte(),produit.getCat());
+                            produit.getQte(),produit.getCat(), produit.getPrix());
                             //refreshTable();
                             Parent parent = loader.getRoot();
                             Stage stage = new Stage();

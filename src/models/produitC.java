@@ -5,12 +5,21 @@ public class produitC {
 	String nom ; 
 	String qte;
 	String cat;
-	public produitC(int id, String nom, String qte, String cat) {
+	String prix;
+
+	public String getPrix() {
+		return prix;
+	}
+	public void setPrix(String prix) {
+		this.prix = prix;
+	}
+	public produitC(int id, String nom, String qte, String cat, String prix) {
 		super();
 		this.id = id;
 		this.nom = nom;
 		this.qte = qte;
 		this.cat = cat;
+		this.prix = prix;
 	}
 	public int getId() {
 		return id;

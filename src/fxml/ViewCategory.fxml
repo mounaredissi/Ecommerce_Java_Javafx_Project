@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -23,6 +24,7 @@
                   <TableColumn fx:id="clmCatagoryBrand" prefWidth="125.0" text="Brand" />
                   <TableColumn fx:id="clmSupplyer" prefWidth="108.0" text="Supplier" />
                   <TableColumn fx:id="clmCatagoryCreator" prefWidth="118.0" text="Category Creator" />
+                  <TableColumn fx:id="clmCatagoryDate" prefWidth="118.0" text="Category Creator" />
               </columns>
                <contextMenu>
                   <ContextMenu>
@@ -51,6 +53,8 @@
          <bottom>
             <HBox alignment="CENTER_RIGHT" prefHeight="72.0" prefWidth="729.0" spacing="30.0" BorderPane.alignment="CENTER">
                <children>
+                  <Label fx:id="prix" prefHeight="17.0" prefWidth="184.0" text="Prix Total= " />
+                  <Button fx:id="print" mnemonicParsing="false" onAction="#print" text="Print" />
                   <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#btnAddOnAction" text="Add New" />
                </children>
             </HBox>

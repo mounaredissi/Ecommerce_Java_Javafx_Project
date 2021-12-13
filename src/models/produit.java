@@ -5,15 +5,30 @@ public class produit {
 	 String nom; 
 	 int qte; 
 	 String cat;
+	 String prix;
 	
 	
 	
 
-	public produit(int id, String nom, int qte, String cat) {
+	public produit(int id, String nom, int qte, String cat, String prix) {
 		this.id = id;
 		this.nom = nom;
 		this.qte = qte;
 		this.cat = cat;
+		this.prix = prix;
+		
+	}
+
+
+
+	public String getPrix() {
+		return prix;
+	}
+
+
+
+	public void setPrix(String prix) {
+		this.prix = prix;
 	}
 
 

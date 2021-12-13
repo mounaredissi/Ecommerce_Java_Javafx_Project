@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -9,7 +10,13 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+import java.io.*;
+import java.net.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -22,6 +29,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -68,7 +76,8 @@ public class factureController implements Initializable {
 
 	    @FXML
 	    private TableColumn<String, String> clmSupplyer;
-
+	    @FXML
+	    private Label prix;
 	    @FXML
 	    private MenuItem miAddNew;
 
@@ -89,13 +98,16 @@ public class factureController implements Initializable {
 
 	    @FXML
 	    private TableView<produitC> tblCatagory;
-
+	    String ch; 
+	    int c=0;
 	    @FXML
 	    private TextField tfSearch;
 	    ObservableList<produitC>  listeProduit = FXCollections.observableArrayList();
   
 	    @FXML
 	    void btnAddOnAction(ActionEvent event) {
+	    	element e = element.getElement();
+	    	e.applyPannier();
 
 	    }
 
@@ -153,14 +165,9 @@ public class factureController implements Initializable {
 	        clmCatagoryBrand.setCellValueFactory(new PropertyValueFactory<>("nom"));
 	        clmSupplyer.setCellValueFactory(new PropertyValueFactory<>("qte"));
 	        clmCatagoryCreator.setCellValueFactory(new PropertyValueFactory<>("cat"));
-	       // clmCatagoryDate.setCellValueFactory(new PropertyValueFactory<>("qte"));
+	        clmCatagoryDate.setCellValueFactory(new PropertyValueFactory<>("prix"));
 	        //clmCatagoryDescription.setCellValueFactory(new PropertyValueFactory<>("cat"));
 
-	       
-	        
-	         
-	         
-	         
 	    }
 
 		private void refreshTable() {
@@ -168,11 +175,31 @@ public class factureController implements Initializable {
 			element m= element.getElement();
 			HashMap <produit , String> contextCollection= m.getElements();
 			for(java.util.Map.Entry<produit,String > entry: contextCollection.entrySet()) {
-				produitC p = new produitC (entry.getKey().getId(),entry.getKey().getNom(),entry.getValue(),entry.getKey().getCat());
+				
+				 c = c + Integer.parseInt(entry.getKey().getPrix())*Integer.parseInt(entry.getValue());
+				produitC p = new produitC (entry.getKey().getId(),entry.getKey().getNom(),entry.getValue(),entry.getKey().getCat(), entry.getKey().getPrix());
 	  	      	listeProduit.add(p);  	     
-	  	      } 	
+	  	      } 
+			System.out.println("le prix est "+c);
+			ch= "le prix de votre commande est"+Integer.toString(c);
+			prix.setText(ch);
 			tblCatagory.setItems(listeProduit);
 			
 		}
+
+	    @FXML
+	    void print(ActionEvent event) throws Exception {
+	    	FileWriter writer = new FileWriter("C:\\\\testtest2.txt"); 
+	    	for(produitC p: listeProduit) {
+	    		  writer.write(p.getNom() +"	"+p.getId()+"	"+p.getQte() + System.lineSeparator());
+	    		  Desktop d = Desktop.getDesktop(); 
+	    		  File u = new File("C:\\\\\\\\testtest2.txt");
+	    		  Desktop.getDesktop().open(u);
+
+	    	}
+	    	writer.close();
+
+	    }
+
 
 }

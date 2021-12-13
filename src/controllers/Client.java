@@ -8,11 +8,14 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -114,7 +117,8 @@ public class Client implements Initializable{
 	                        resultSet.getInt("id"),
 	                        resultSet.getString("nom"),
 	                        resultSet.getInt("qte"),
-	                        resultSet.getString("cat")));
+	                        resultSet.getString("cat"),
+	                        resultSet.getString("prix")));
 	                productTab.setItems(produitList);
 
 	            }
@@ -127,8 +131,9 @@ public class Client implements Initializable{
 
 	        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 	        nomCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
-	        qteCol.setCellValueFactory(new PropertyValueFactory<>("qte"));
+	        qteCol.setCellValueFactory(new PropertyValueFactory<>("prix"));
 	        catCol.setCellValueFactory(new PropertyValueFactory<>("cat"));
+	        prixCol.setCellValueFactory(new PropertyValueFactory<>("prix"));
 
 
 
@@ -160,19 +165,41 @@ public class Client implements Initializable{
                         	
 
 	                       
+	                        
 	                        ajoutIcon.setOnMouseClicked((MouseEvent event) -> {
+	                        	
 	                            PreparedStatement preparedStatement = null ;
 	                           // ResultSet resultSet = null ;
 
+	                            
 	                            produit = productTab.getSelectionModel().getSelectedItem();
-	                            Singleton f = Singleton.getInstance();
-	                         	Globe g =Globe.getGlobe();
-	                         	g.putContext(produit);
-	                         	//g.getContext();
-	                         	System.out.println("la quantité est "+b.getText());
-	                         	element m = element.getElement();
-	                         	m.putContext( produit, b.getText());
-	                         	m.affichage();
+	                            	if(Integer.parseInt(b.getText())>produit.getQte()){
+	                            		Alert alert = new Alert(AlertType.CONFIRMATION);
+	                            		
+	                            		alert.setHeaderText("non quantité en stock est limité!");
+	                            		alert.setContentText("Entrer!");
+	                            		
+	                            		if (alert.showAndWait().get() == ButtonType.OK){
+	                            			System.out.println("c'est bon");
+	                            			
+	                            		} 
+	
+	                        	}
+	                            	else {
+	                            		Singleton f = Singleton.getInstance();
+	    	                         	Globe g =Globe.getGlobe();
+	    	                         	g.putContext(produit);
+	    	                         	//g.getContext();
+	    	                         	System.out.println("la quantité est "+b.getText());
+	    	                         	element m = element.getElement();
+	    	                         	m.putContext( produit, b.getText());
+	    	                         	m.affichage();
+	    	                         	 for(int i=0; i<	g.getContext().size() ;i++ )
+	    		                            {
+	    		                                System.out.printf(String.valueOf(produit));
+	    		                            }
+	                            	}
+	                            
 	                         	
 
 	                         	//f.addProduitList(produit);
@@ -184,17 +211,10 @@ public class Client implements Initializable{
 	                            //prodList.add(produit);
 		                   	   
 	                            //System.out.printf(String.valueOf(produit));
-	                            for(int i=0; i<	g.getContext().size() ;i++ )
-	                            {
-	                                System.out.printf(String.valueOf(produit));
-	                            }
+	                           
 
 	                         
 	                        });
-	                        
-	                      
-
-
 	                        HBox managebtn = new HBox(b, ajoutIcon);
 	                        managebtn.setStyle("-fx-alignment:center");
 	                        HBox.setMargin(b, new Insets(2, 2, 0, 1));
@@ -216,8 +236,7 @@ public class Client implements Initializable{
 	    }
 	    @FXML
 	    void voirPanier(ActionEvent event) {
-	    	element e = element.getElement();
-	    	e.applyPannier();
+	    	
 
 	    }
 	    @FXML

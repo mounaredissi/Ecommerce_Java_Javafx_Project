@@ -92,7 +92,8 @@ public class dashboardController implements Initializable {
                         resultSet.getInt("id"),
                         resultSet.getString("nom"),
                         resultSet.getInt("qte"),
-                        resultSet.getString("cat")));
+                        resultSet.getString("cat"),
+                        resultSet.getString("prix")));
                 tbData.setItems(produitListe);
                 
             }
@@ -113,6 +114,7 @@ private void loadDate() {
         nomProduit.setCellValueFactory(new PropertyValueFactory<>("nom"));
         qteEnStock.setCellValueFactory(new PropertyValueFactory<>("qte"));
         categorie.setCellValueFactory(new PropertyValueFactory<>("cat"));
+        //categorie.setCellValueFactory(new PropertyValueFactory<>("cat"));
 
          tbData.setItems(produitListe);
          try {

@@ -25,7 +25,7 @@ public class produitsController {
 	        stm.setObject(1, adNo);
 	        ResultSet rst=stm.executeQuery();
 	        if(rst.next()){
-	            produit s= new produit (rst.getInt(1),rst.getString(2),rst.getInt(3), rst.getString(4));
+	            produit s= new produit (rst.getInt(1),rst.getString(2),rst.getInt(3), rst.getString(4), rst.getString(5));
 	            return s;
 	        }
 	        return null;
