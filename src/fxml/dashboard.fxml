@@ -62,7 +62,7 @@
             </Pane>
             <Pane prefHeight="103.0" prefWidth="200.0" style="-fx-background-color: #3f63af; -fx-background-radius: 1em;" GridPane.columnIndex="1">
                <children>
-                  <Label layoutX="36.0" layoutY="69.0" text="commandes non livrés" textFill="WHITE">
+                  <Label layoutX="36.0" layoutY="69.0" text="Toute les commandes" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -76,7 +76,7 @@
             </Pane>
             <Pane prefHeight="103.0" prefWidth="200.0" style="-fx-background-color: #5e97fb; -fx-background-radius: 1em;" GridPane.columnIndex="2">
                <children>
-                  <Label layoutX="47.0" layoutY="69.0" text="Commandes livrés" textFill="WHITE">
+                  <Label layoutX="47.0" layoutY="69.0" text="Commandes Recues" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -90,7 +90,7 @@
             </Pane>
             <Pane prefHeight="103.0" prefWidth="200.0" style="-fx-background-color: #90b7fc; -fx-background-radius: 1em;" GridPane.columnIndex="3">
                <children>
-                  <Label layoutX="82.0" layoutY="69.0" text="clients" textFill="WHITE">
+                  <Label layoutX="44.0" layoutY="69.0" text="commande annulés" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>

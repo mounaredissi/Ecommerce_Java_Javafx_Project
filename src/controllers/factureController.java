@@ -26,6 +26,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -50,6 +51,8 @@ public class factureController implements Initializable {
 
 
 
+    @FXML
+    private Button retour;
 	    @FXML
 	    private Button btnAdd;
 
@@ -192,13 +195,41 @@ public class factureController implements Initializable {
 	    	FileWriter writer = new FileWriter("C:\\\\testtest2.txt"); 
 	    	for(produitC p: listeProduit) {
 	    		  writer.write(p.getNom() +"	"+p.getId()+"	"+p.getQte() + System.lineSeparator());
-	    		  Desktop d = Desktop.getDesktop(); 
-	    		  File u = new File("C:\\\\\\\\testtest2.txt");
-	    		  Desktop.getDesktop().open(u);
-
 	    	}
+	      Desktop d = Desktop.getDesktop(); 
+   		  File u = new File("C:\\\\\\\\VotreCommande.txt");
+   		  Desktop.getDesktop().open(u);
 	    	writer.close();
 
+	    }
+	    @FXML
+	    void retour(ActionEvent event) {
+			if (event.getSource() == retour) {
+				
+			
+	                //add you loading or delays - 
+	                Node node = (Node) event.getSource();
+	                Stage stage = (Stage) node.getScene().getWindow();
+	                //stage.setMaximized(true);
+	                stage.close();
+	                Scene scene;
+					try {
+						scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/Clients.fxml")));
+						stage.setScene(scene);
+			            stage.show();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+	               
+
+	          
+				
+
+			}
+			else{
+				System.out.println("erreur pas de passage ");
+			}
 	    }
 
 

@@ -1,3 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/controllers/Client.java=UTF-8
 encoding//src/controllers/LoginController.java=UTF-8
+encoding//src/controllers/adminController.java=UTF-8
+encoding//src/controllers/factureController.java=UTF-8
+encoding//src/controllers/livreurController.java=UTF-8

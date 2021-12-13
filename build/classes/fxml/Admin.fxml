@@ -33,27 +33,14 @@
         </Pane>
       <Pane layoutX="14.0" layoutY="-29.0" prefHeight="200.0" prefWidth="200.0">
          <children>
-            <ImageView fitHeight="76.0" fitWidth="171.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="82.0" fitWidth="131.0" layoutX="35.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/logo.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-          <Button fx:id="btnUpdate" contentDisplay="TOP" layoutX="410.0" layoutY="331.0" mnemonicParsing="false" prefHeight="95.0" prefWidth="215.0" style="-fx-background-color: #3760a9;" text="informations" textFill="WHITE">
-              <styleClass>
-                  <String fx:value="chosen-fruit-card" />
-                  <String fx:value="shadow" />
-              </styleClass>
-              <stylesheets>
-                  <URL value="@../css/fullpackstyling.css" />
-                  <URL value="@../style.css" />
-              </stylesheets>
-              <font>
-                  <Font size="27.0" />
-              </font>
-      </Button>
-          <Button fx:id="btnClasses" contentDisplay="TOP" layoutX="170.0" layoutY="330.0" mnemonicParsing="false" prefHeight="95.0" prefWidth="215.0" style="-fx-background-color: #3760a9;" text="Clients" textFill="WHITE">
+          <Button fx:id="btnClasses" contentDisplay="TOP" layoutX="273.0" layoutY="324.0" mnemonicParsing="false" prefHeight="95.0" prefWidth="215.0" style="-fx-background-color: #3760a9;" text="Clients" textFill="WHITE">
               <styleClass>
                   <String fx:value="chosen-fruit-card" />
                   <String fx:value="shadow" />
@@ -92,7 +79,7 @@
                   <Font name="Cambria" size="27.0" />
               </font>
       </Button>
-          <Button fx:id="btn_Timetable" contentDisplay="TOP" layoutX="274.0" layoutY="211.0" mnemonicParsing="false" onAction="#handleButtonClicks" prefHeight="95.0" prefWidth="215.0" style="-fx-background-color: #3760a9;" text="commandes" textFill="WHITE">
+          <Button fx:id="commandes" contentDisplay="TOP" layoutX="274.0" layoutY="211.0" mnemonicParsing="false" onAction="#commandes" prefHeight="95.0" prefWidth="215.0" style="-fx-background-color: #3760a9;" text="commandes" textFill="WHITE">
               <styleClass>
                   <String fx:value="chosen-fruit-card" />
                   <String fx:value="shadow" />
@@ -104,6 +91,11 @@
               <font>
                   <Font name="Cambria" size="27.0" />
               </font>
+      </Button>
+      <Button fx:id="btnlogout" layoutX="713.0" layoutY="35.0" mnemonicParsing="false" onAction="#logout" onMouseClicked="#logout" prefHeight="27.0" prefWidth="95.0" styleClass="chosen-fruit-card" stylesheets="@../style.css" text="sortir " textFill="WHITE" underline="true">
+         <font>
+            <Font name="Cambria Bold" size="15.0" />
+         </font>
       </Button>
     </children>
 </AnchorPane>

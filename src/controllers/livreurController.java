@@ -19,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -62,7 +63,8 @@ public class 	livreurController implements Initializable{
     @FXML
     private Button refresh;
 	protected commande commande;
-
+	@FXML
+	private Button btnlogout;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -76,7 +78,7 @@ public class 	livreurController implements Initializable{
     public void refreshTable() {
         try {
         	commandeList.clear();
-            query = "SELECT * FROM `commandes`";
+            query = "SELECT * FROM commandes";
             preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
@@ -126,8 +128,8 @@ private void loadDate() {
 
                     } else {
 
-                        Button annuleButton = new Button("annulé");
-                        Button livreButton = new Button("livré");
+                        Button annuleButton = new Button("annulÃ©");
+                        Button livreButton = new Button("livrÃ©");
 
                         annuleButton.setStyle(
                                 " -fx-cursor: hand ;"
@@ -142,11 +144,11 @@ private void loadDate() {
                         //livreButton.setDisable(true);
                         //annuleButton.setOnAction((ActionEvent e) -> livreButton.setDisable(true));
                         //commande = commandeTab.getSelectionModel().getSelectedItem();
-                        /*if(=="annulé") {
+                        /*if(=="annulÃ©") {
                         	livreButton.setDisable(true);
                         	annuleButton.setDisable(true);
                         }*/
-                        /*else if(commande.getEtat()=="livré"){
+                        /*else if(commande.getEtat()=="livrÃ©"){
                         	annuleButton.setDisable(true);
                         }*/
 
@@ -156,11 +158,11 @@ private void loadDate() {
                         		   
                                    commande = commandeTab.getSelectionModel().getSelectedItem();
                                    
-                                   query = "update  `commandes` set etat  ='annulé' where idC  ="+commande.getIdCommande();
+                                   query = "update  commandes set etat  ='annulÃ©' where idC  ="+commande.getIdCommande();
                            			connection  = ConnectionUtil.conDB();
                                    preparedStatement = connection.prepareStatement(query);
                                    preparedStatement.execute();
-                                   incrementerQuantité(commande.getIdCommande());
+                                   incrementerQuantitÃ©(commande.getIdCommande());
                                    refreshTable();
                                    
                                    
@@ -176,7 +178,7 @@ private void loadDate() {
                      	   try {
                      		   
                                commande = commandeTab.getSelectionModel().getSelectedItem();
-                               query = "update  `commandes` set etat  ='recu' where idC  ="+commande.getIdCommande();
+                               query = "update  commandes set etat  ='recu' where idC  ="+commande.getIdCommande();
                        			connection  = ConnectionUtil.conDB();
                                preparedStatement = connection.prepareStatement(query);
                                preparedStatement.execute();
@@ -217,7 +219,7 @@ void refreshButton(ActionEvent event) {
 
 	try {
     	commandeList.clear();
-        query = "SELECT * FROM `commandes`";
+        query = "SELECT * FROM commandes";
         preparedStatement = connection.prepareStatement(query);
         resultSet = preparedStatement.executeQuery();
         
@@ -239,8 +241,36 @@ void refreshButton(ActionEvent event) {
     }
     
 }
-void incrementerQuantité(int c ) {
-	String query4 = "select * from  `produitc` where idC ="+c;
+@FXML
+void logout(ActionEvent event) {
+	if (event.getSource() == btnlogout) {
+		Singleton s = Singleton.getInstance() ;
+		int idClient = s.getId() ;
+		s.setInstance(0);
+		System.out.println(s.getInstance());
+		try {
+
+            //add you loading or delays - 
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            //stage.setMaximized(true);
+            stage.close();
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/Login.fxml")));
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
+		
+
+	}
+	else{
+		System.out.println("erreur pas de passage ");
+	}
+}
+void incrementerQuantitÃ©(int c ) {
+	String query4 = "select * from  produitc where idC ="+c;
   	 try {
   		 
          preparedStatement = connection.prepareStatement(query4);
@@ -250,9 +280,9 @@ void incrementerQuantité(int c ) {
              int produitS =  rse.getInt("idP");
              int produitQte= rse.getInt("qte");
              System.out.println("le prpduit est "+produitS);
-             String query5 = "select * from  `produits` where id ="+produitS;
+             String query5 = "select * from  produits where id ="+produitS;
           	 try {
-          		 System.out.println("la nouvelle quantité ");
+          		 System.out.println("la nouvelle quantitÃ© ");
                  preparedStatement = connection.prepareStatement(query4);
         	     java.sql.Statement ster = connection.createStatement();
                  ResultSet rser = ster.executeQuery(query5) ;
@@ -263,8 +293,8 @@ void incrementerQuantité(int c ) {
                     
                      int produitQter= rser.getInt("qte");
                      System.out.println("le prpduit est "+produitS);
-                     System.out.println("la quantité demandé  est "+produitQter);
-                     String query6 = "UPDATE `produits` SET "
+                     System.out.println("la quantitÃ© demandÃ©  est "+produitQter);
+                     String query6 = "UPDATE produits SET "
                       
 	 	                        + "`qte`= ? WHERE id = '"+produitS+"'";
 	 	              	 try {
@@ -272,7 +302,7 @@ void incrementerQuantité(int c ) {
 	 	                    preparedStatement = connection.prepareStatement(query6);
 	 	                    preparedStatement.setInt(1,produitQter+produitQte);
 	 	                    preparedStatement.execute();
-	 	                } catch (SQLException ex) { // ily
+	 	                } catch (SQLException ex) {
 	 	                    Logger.getLogger(ajoutProduitController.class.getName()).log(Level.SEVERE, null, ex);
 	 	                }
              }

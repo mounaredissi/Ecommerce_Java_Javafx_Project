@@ -84,8 +84,13 @@ public class produitController implements Initializable  {
             }
             FileWriter writer = new FileWriter("C:\\testtest2.txt"); 
             for(produit str: produitList) {
-              writer.write(str.getId()+ " "+ str.getNom()+" "+ str.getQte() +" "+str.getCat()+ "\n");
-            }
+            	writer.write( 
+            			"********************************Bienvenu!!********************************"+"\n" +
+            			"Le produit que vous avez ajouté est : "+"\n" +
+            			"ID:"+" "+str.getId()+ "\n"+
+            			"Le nom : "+" "+ str.getNom()+ "\n" +
+            			" la quantité :"+" "+ str.getQte()+ "\n" +
+            			" la categorie :" +" "+str.getCat()+ "\n");            }
             writer.close();
             
             

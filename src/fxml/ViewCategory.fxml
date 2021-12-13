@@ -7,7 +7,6 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -45,8 +44,7 @@
          <top>
             <HBox alignment="CENTER" prefHeight="63.0" prefWidth="729.0" BorderPane.alignment="CENTER">
                <children>
-                  <TextField fx:id="tfSearch" onKeyReleased="#tfSearchOnType" prefHeight="31.0" prefWidth="586.0" promptText="Search Category" />
-                  <Button fx:id="btnRefresh" mnemonicParsing="false" onAction="#btnRefreshOnAction" prefHeight="30.0" prefWidth="33.0" />
+                  <Button fx:id="retour" mnemonicParsing="false" onAction="#retour" text="Retourner vers le catalgoue" />
                </children>
             </HBox>
          </top>

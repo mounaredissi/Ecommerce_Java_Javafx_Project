@@ -59,6 +59,9 @@ public class Client implements Initializable{
 
 	    @FXML
 	    private Button panier;
+
+		@FXML
+		private Button btnlogout;
 	    ObservableList<produit> data;
 	    String query = null;
 	    Connection connection = null ;
@@ -131,7 +134,7 @@ public class Client implements Initializable{
 
 	        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 	        nomCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
-	        qteCol.setCellValueFactory(new PropertyValueFactory<>("prix"));
+	        qteCol.setCellValueFactory(new PropertyValueFactory<>("qte"));
 	        catCol.setCellValueFactory(new PropertyValueFactory<>("cat"));
 	        prixCol.setCellValueFactory(new PropertyValueFactory<>("prix"));
 
@@ -153,7 +156,7 @@ public class Client implements Initializable{
 
 	                    } else {
 	                        TextField b = new TextField();
-	                        Button ajoutIcon = new Button("ajout");
+	                        Button ajoutIcon = new Button("+");
 	                        //Button editIcon = new Button("edit");
 	                        
 
@@ -217,8 +220,8 @@ public class Client implements Initializable{
 	                        });
 	                        HBox managebtn = new HBox(b, ajoutIcon);
 	                        managebtn.setStyle("-fx-alignment:center");
-	                        HBox.setMargin(b, new Insets(2, 2, 0, 1));
-	                        HBox.setMargin(ajoutIcon, new Insets(2, 4, 0, 1));
+	                        HBox.setMargin(b, new Insets(1, 1, 0, 0));
+	                        HBox.setMargin(ajoutIcon, new Insets(1, 2, 0, 1));
 	                        setGraphic(managebtn);
 
 	                        setText(null);
@@ -243,7 +246,7 @@ public class Client implements Initializable{
 	    void loadPanier(ActionEvent event) {
         	try {
 
-                //add you loading or delays - 😉
+                //add you loading or delays - 
                 Node node = (Node) event.getSource();
                 Stage stage = (Stage) node.getScene().getWindow();
                 //stage.setMaximized(true);
@@ -256,7 +259,34 @@ public class Client implements Initializable{
                 System.err.println(ex.getMessage());
             }
 	    }
+	    @FXML
+	    void logout(ActionEvent event) {
+			if (event.getSource() == btnlogout) {
+				Singleton s = Singleton.getInstance() ;
+				int idClient = s.getId() ;
+				s.setInstance(0);
+				System.out.println(s.getInstance());
+				try {
 
+	                //add you loading or delays - 😉
+	                Node node = (Node) event.getSource();
+	                Stage stage = (Stage) node.getScene().getWindow();
+	                //stage.setMaximized(true);
+	                stage.close();
+	                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/Login.fxml")));
+	                stage.setScene(scene);
+	                stage.show();
+
+	            } catch (IOException ex) {
+	                System.err.println(ex.getMessage());
+	            }
+				
+
+			}
+			else{
+				System.out.println("erreur pas de passage ");
+			}
+	    }
 
 
 

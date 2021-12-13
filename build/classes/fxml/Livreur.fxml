@@ -30,6 +30,7 @@
                   <Image url="@../../../../../Downloads/00d6417c52a2455b82ab905e656de853.png" />
                </image>
             </ImageView>
+            <Button fx:id="btnlogout" layoutX="1016.0" layoutY="81.0" mnemonicParsing="false" onAction="#logout" text="Button" />
          </children>
       </Pane>
       <TableView fx:id="commandeTab" layoutX="20.0" layoutY="192.0" prefHeight="349.0" prefWidth="1066.0" stylesheets="@../css/fullpackstyling.css" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="192.0">

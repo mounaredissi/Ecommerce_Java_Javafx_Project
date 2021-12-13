@@ -131,10 +131,54 @@ private void loadDate() {
          } catch (SQLException ex) {
              Logger.getLogger(produitController.class.getName()).log(Level.SEVERE, null, ex);
          }
+try {
+             
+             query = "SELECT  count(*) as n  FROM commandes";
+             preparedStatement = connection.prepareStatement(query);
+             resultSet = preparedStatement.executeQuery();
+             
+             while (resultSet.next()){
+            	 nbr= resultSet.getInt("n");
+                 nbreCommandeNonLivre.setText(Integer.toString(nbr));
+             }
+             
+         } catch (SQLException ex) {
+             Logger.getLogger(produitController.class.getName()).log(Level.SEVERE, null, ex);
+         }
+try {
+    
+    query = "SELECT  count(*) as n  FROM commandes where etat='recu'";
+    preparedStatement = connection.prepareStatement(query);
+    resultSet = preparedStatement.executeQuery();
+    
+    while (resultSet.next()){
+   	 nbr= resultSet.getInt("n");
+   	nbreCommande.setText(Integer.toString(nbr));
+    }
+    
+} catch (SQLException ex) {
+    Logger.getLogger(produitController.class.getName()).log(Level.SEVERE, null, ex);
+}
+try {
+    
+    query = "SELECT  count(*) as n  FROM commandes where etat='annulé'";
+    preparedStatement = connection.prepareStatement(query);
+    resultSet = preparedStatement.executeQuery();
+    
+    while (resultSet.next()){
+   	 nbr= resultSet.getInt("n");
+   	nbreClient.setText(Integer.toString(nbr));
+    }
+    
+} catch (SQLException ex) {
+    Logger.getLogger(produitController.class.getName()).log(Level.SEVERE, null, ex);
+}
          
          
          
     }
+
+
     
     
 
